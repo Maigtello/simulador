@@ -4,7 +4,7 @@ package com.example.marcos.simulador;
  * Created by Marcos on 17/12/2016.
  */
 
-public class Carta {
+public class Carta  {
     private int valor;
 
     public Carta(){
@@ -26,5 +26,12 @@ public class Carta {
     }
     public void setValor(int v){
         valor = v;
+    }
+    public void setValor(String v){
+        if(v.equals("As")) valor = 13;
+        else if(v.equals("K")) valor = 13;
+        else if(v.equals("Q")) valor = 12;
+        else if(v.equals("J")) valor = 11;
+        else valor=0;
     }
 }
