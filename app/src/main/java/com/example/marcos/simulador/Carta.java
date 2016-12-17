@@ -6,6 +6,7 @@ package com.example.marcos.simulador;
 
 public class Carta  {
     private int valor;
+    //de momento las cartas solo tienen valor, falta asignarles un palo
 
     public Carta(){
         valor = 0;

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void onClick(View view){
+    public void onClick(View view){
         Carta jugador1A= new Carta();
         Carta jugador1B = new Carta();
         Carta jugador2A = new Carta();
