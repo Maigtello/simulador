@@ -10,8 +10,57 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marcos.simulador.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Player 1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView0"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:text="Player 2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_row="2"
+            android:layout_column="0" />
+
+        <Spinner
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner0"
+            android:entries="@array/cartas"
+            android:layout_row="0"
+            android:layout_column="1" />
+        <Spinner
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner1"
+            android:entries="@array/cartas"
+            android:layout_row="1"
+            android:layout_column="1" />
+        <Spinner
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:entries="@array/cartas"
+            android:layout_row="2"
+            android:layout_column="1" />
+        <Spinner
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner3"
+            android:entries="@array/cartas"
+            android:layout_row="3"
+            android:layout_column="1" />
+
+    </GridLayout>
 </RelativeLayout>
