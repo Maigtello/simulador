@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
 
-        pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);
+        /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
 
         textView0.setText(pantalla);
     }
@@ -115,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
          return s.getSelectedItem() instanceof String;
 
     }
-    private String ganador(Carta a, Carta b, Carta c, Carta d, Mesa m){
+    /*private String ganador(Carta a, Carta b, Carta c, Carta d, Mesa m){
 
         Switch(valor){
             Case1:
 
         }
 
-    }
+    }*/
 }

@@ -32,6 +32,7 @@ public class Mesa {
                     else pareja = true;
 
         }
+        return 0;
     }
 
 }
