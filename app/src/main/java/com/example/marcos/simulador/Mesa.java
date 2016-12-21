@@ -19,7 +19,7 @@ public class Mesa {
         mesa[3]=d;
         mesa[4]=e;
     }
-    public int comparar(Carta a, Carta b, Mesa m){
+    public int verMano(Carta a, Carta b, Mesa m){
         int p= a.getValor();
         int s =b.getValor();
         Boolean pareja = p==s;
@@ -28,8 +28,8 @@ public class Mesa {
 
         for(int i =0; i<mesa.length;i++){
             if(mesa[i].getValor() == p && pareja && trio==false) trio= true;
-                else if(pareja && trio) poker = true;
-                    else pareja = true;
+            else if(pareja && trio) poker = true;
+            else pareja = true;
 
         }
         return 0;

@@ -12,7 +12,8 @@ import static android.R.attr.onClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Spinner spinner0,spinner1,spinner2,spinner3,spinner4,spinner5,spinner6,spinner7,spinner8;
+    private Spinner spinner0,spinner1,spinner2,spinner3,spinner4,spinner5,spinner6,spinner7,spinner8,
+            spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
     private Button button0;
     private TextView textView0;
     private String pantalla="";
@@ -23,20 +24,27 @@ public class MainActivity extends AppCompatActivity {
         //jugador1
         spinner0 = (Spinner) findViewById(R.id.spinner0);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner9 =(Spinner) findViewById(R.id.spinner9);
+        spinner10 =(Spinner) findViewById(R.id.spinner10);
         //jugador2
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner3 = (Spinner) findViewById(R.id.spinner3);
+        spinner11 = (Spinner) findViewById(R.id.spinner11);
+        spinner12 = (Spinner) findViewById(R.id.spinner12);
         //mesa
         spinner4 = (Spinner) findViewById(R.id.spinner4);
         spinner5 = (Spinner) findViewById(R.id.spinner5);
         spinner6 = (Spinner) findViewById(R.id.spinner6);
         spinner7 = (Spinner) findViewById(R.id.spinner7);
         spinner8 = (Spinner) findViewById(R.id.spinner8);
+        spinner13 = (Spinner) findViewById(R.id.spinner13);
+        spinner14 = (Spinner) findViewById(R.id.spinner14);
+        spinner15 = (Spinner) findViewById(R.id.spinner15);
+        spinner16 = (Spinner) findViewById(R.id.spinner16);
+        spinner17 = (Spinner) findViewById(R.id.spinner17);
 
         button0 = (Button) findViewById(R.id.buttonCalcular);
         textView0 = (TextView) findViewById(R.id.textViewResult);
-
-
     }
     public void onClick(View view){
         Carta jugador1A= new Carta();

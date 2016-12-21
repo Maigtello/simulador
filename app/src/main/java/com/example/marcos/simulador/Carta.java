@@ -6,12 +6,14 @@ package com.example.marcos.simulador;
 
 public class Carta  {
     private int valor;
+    private String palo;
     //de momento las cartas solo tienen valor, falta asignarles un palo
 
     public Carta(){
         valor = 0;
     }
-    public Carta(int v){
+    public Carta(int v, String p){
+        palo = p;
         if(v>10 || v<1)valor =0;
         else valor = v;
     }
@@ -25,11 +27,13 @@ public class Carta  {
     public int getValor(){
         return valor;
     }
+    public String getPalo() { return palo; }
     public void setValor(int v){
         valor = v;
     }
+    public void setPalo(String p) { palo=p; }
     public void setValor(String v){
-        if(v.equals("As")) valor = 13;
+        if(v.equals("As")) valor = 14;
         else if(v.equals("K")) valor = 13;
         else if(v.equals("Q")) valor = 12;
         else if(v.equals("J")) valor = 11;
