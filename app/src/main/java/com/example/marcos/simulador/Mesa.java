@@ -1,5 +1,5 @@
 package com.example.marcos.simulador;
-
+import java.util.Arrays;
 /**
  * Created by Marcos on 17/12/2016.
  */
@@ -19,20 +19,66 @@ public class Mesa {
         mesa[3]=d;
         mesa[4]=e;
     }
-    public int verMano(Carta a, Carta b, Mesa m){
-        int p= a.getValor();
-        int s =b.getValor();
+    public int verMano(Carta a, Carta b){
+        int contA =0;
+        int contB=0;
+        int esca=0;
+        int p = a.getValor();
+        int s = b.getValor();
         Boolean pareja = p==s;
         Boolean trio = false;
         Boolean poker = false;
-
+/*
         for(int i =0; i<mesa.length;i++){
             if(mesa[i].getValor() == p && pareja && trio==false) trio= true;
             else if(pareja && trio) poker = true;
             else pareja = true;
 
         }
-        return 0;
+        */
+
+       if(pareja){ contA++;contB++;}
+        for(int i =0;i<mesa.length;i++) {
+
+            if (p == mesa[i].getValor()) contA++;
+            if (s == mesa[i].getValor()) contB++;
+
+        }
+        //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
+        if(contA==3 || contB==3)return 3;
+        if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
+        if(contA==2 || contB==2) return 7;
+        if(contA==1 && contB==1)return 8;
+        if(contA==1 && contB==0)return 9;
+
+
+
+
+
+      //lo que hago a continuacion es para saber si hay escalera
+        int orden[]={p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
+    //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
+         Arrays.sort(orden);
+      for(int i =0; i<orden.length-1;i++){
+            if(orden[i]==orden[i+1])esca++;
+        }
+        if(esca>=5) return 6;
+
+
+/*
+Esta es la lista de int que tiene que devolver segun el caso;
+1 	Escalera real o flor imperial
+2 	Escalera de color
+3 	Póquer
+4 	Full
+5   Color
+6 	Escalera
+7 	Trío
+8 	Doble pareja
+9 	Pareja
+10 	Carta alta
+ */
+        return 10;
     }
 
 }

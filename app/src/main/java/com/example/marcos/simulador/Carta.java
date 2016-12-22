@@ -11,6 +11,7 @@ public class Carta  {
 
     public Carta(){
         valor = 0;
+        palo = "Indiferente";
     }
     public Carta(int v, String p){
         palo = p;

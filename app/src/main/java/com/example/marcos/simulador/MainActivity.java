@@ -8,14 +8,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import static android.R.attr.onClick;
 
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spinner0,spinner1,spinner2,spinner3,spinner4,spinner5,spinner6,spinner7,spinner8,
             spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
-    private Button button0;
-    private TextView textView0;
+    private Button buttonCalcular;
+    private TextView textViewR;
     private String pantalla="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         spinner16 = (Spinner) findViewById(R.id.spinner16);
         spinner17 = (Spinner) findViewById(R.id.spinner17);
 
-        button0 = (Button) findViewById(R.id.buttonCalcular);
-        textView0 = (TextView) findViewById(R.id.textViewResult);
+        buttonCalcular = (Button) findViewById(R.id.buttonCalcular);
+        textViewR = (TextView) findViewById(R.id.textViewResult);
     }
     public void onClick(View view){
         Carta jugador1A= new Carta();
@@ -66,58 +65,63 @@ public class MainActivity extends AppCompatActivity {
             jugador1A.setValor((Integer) spinner0.getSelectedItem());
         }
         if(comprobar(spinner1)) {
-            jugador1B.setValor((String) spinner0.getSelectedItem());
+            jugador1B.setValor((String) spinner1.getSelectedItem());
         }
         else {
-            jugador1B.setValor((Integer) spinner0.getSelectedItem());
+            jugador1B.setValor((Integer) spinner1.getSelectedItem());
         }
         if(comprobar(spinner2)) {
-            jugador2A.setValor((String) spinner0.getSelectedItem());
+            jugador2A.setValor((String) spinner2.getSelectedItem());
         }
         else {
-            jugador2A.setValor((Integer) spinner0.getSelectedItem());
+            jugador2A.setValor((Integer) spinner2.getSelectedItem());
         }
         if(comprobar(spinner3)) {
-            jugador2B.setValor((String) spinner0.getSelectedItem());
+            jugador2B.setValor((String) spinner3.getSelectedItem());
         }
         else {
-            jugador2B.setValor((Integer) spinner0.getSelectedItem());
+            jugador2B.setValor((Integer) spinner3.getSelectedItem());
         }
         if(comprobar(spinner4)) {
-            mesaA.setValor((String) spinner0.getSelectedItem());
+            mesaA.setValor((String) spinner4.getSelectedItem());
         }
         else {
-            mesaA.setValor((Integer) spinner0.getSelectedItem());
+            mesaA.setValor((Integer) spinner4.getSelectedItem());
         }
         if(comprobar(spinner5)) {
-            mesaB.setValor((String) spinner0.getSelectedItem());
+            mesaB.setValor((String) spinner5.getSelectedItem());
         }
         else {
-            mesaB.setValor((Integer) spinner0.getSelectedItem());
+            mesaB.setValor((Integer) spinner5.getSelectedItem());
         }
         if(comprobar(spinner6)) {
-            mesaC.setValor((String) spinner0.getSelectedItem());
+            mesaC.setValor((String) spinner6.getSelectedItem());
         }
         else {
-           mesaC.setValor((Integer) spinner0.getSelectedItem());
+           mesaC.setValor((Integer) spinner6.getSelectedItem());
         }
         if(comprobar(spinner7)) {
-            mesaD.setValor((String) spinner0.getSelectedItem());
+            mesaD.setValor((String) spinner7.getSelectedItem());
         }
         else {
-            mesaD.setValor((Integer) spinner0.getSelectedItem());
+            mesaD.setValor((Integer) spinner7.getSelectedItem());
         }
         if(comprobar(spinner8)) {
-            mesaE.setValor((String) spinner0.getSelectedItem());
+            mesaE.setValor((String) spinner8.getSelectedItem());
         }
         else {
-            mesaE.setValor((Integer) spinner0.getSelectedItem());
+            mesaE.setValor((Integer) spinner8.getSelectedItem());
         }
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
 
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
+        int puntA= mesa.verMano(jugador1A,jugador2A);
+        int puntB =mesa.verMano(jugador1B,jugador2B);
+        if(puntA>puntB) pantalla="Gana el jugador A";
+        else if(puntA<puntB) pantalla="Gana el jugador B";
+        else pantalla="Empate";
 
-        textView0.setText(pantalla);
+        textViewR.setText(pantalla);
     }
     private boolean comprobar(Spinner s){
          return s.getSelectedItem() instanceof String;
