@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
             spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
     private Button buttonCalcular;
     private TextView textViewR;
-    private String pantalla="";
+    private String pantalla="Empate";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
       //la intencion es dar el valor de los sppiner a las cartas.
         if(comprobar(spinner0)) {
+
             jugador1A.setValor((String) spinner0.getSelectedItem());
+            //int a= jugador1A.getValor();
+            //System.out.println(a);
         }
             else {
+
             jugador1A.setValor((Integer) spinner0.getSelectedItem());
+            //int b= jugador1A.getValor();
+            //System.out.println(b);
         }
         if(comprobar(spinner1)) {
             jugador1B.setValor((String) spinner1.getSelectedItem());
@@ -115,11 +121,12 @@ public class MainActivity extends AppCompatActivity {
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
 
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
-        int puntA= mesa.verMano(jugador1A,jugador2A);
-        int puntB =mesa.verMano(jugador1B,jugador2B);
-        if(puntA>puntB) pantalla="Gana el jugador A";
-        else if(puntA<puntB) pantalla="Gana el jugador B";
-        else pantalla="Empate";
+        int puntA= mesa.verMano(jugador1A,jugador1B);
+        int puntB =mesa.verMano(jugador2A,jugador2B);
+        if(puntA ==0 || puntB==0) pantalla="Error";
+        if(puntA>puntB) pantalla="Gana el jugador B";
+        else if(puntA<puntB) pantalla="Gana el jugador A";
+       // else pantalla="Empate";
 
         textViewR.setText(pantalla);
     }

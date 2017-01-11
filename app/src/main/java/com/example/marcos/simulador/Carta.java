@@ -11,14 +11,14 @@ public class Carta  {
 
     public Carta(){
         valor = 0;
-        palo = "Indiferente";
+        palo="";
     }
     public Carta(int v, String p){
         palo = p;
         if(v>10 || v<1)valor =0;
         else valor = v;
     }
-    public Carta(String v){
+    public Carta(String v, String palo){
         if(v.equals("As")) valor = 14;
         else if(v.equals("K")) valor = 13;
         else if(v.equals("Q")) valor = 12;

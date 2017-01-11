@@ -25,6 +25,7 @@ public class Mesa {
         int esca=0;
         int p = a.getValor();
         int s = b.getValor();
+        if(p==0 || s==0)return 0;
         Boolean pareja = p==s;
         Boolean trio = false;
         Boolean poker = false;
@@ -37,7 +38,9 @@ public class Mesa {
         }
         */
 
-       if(pareja){ contA++;contB++;}
+       if(pareja){
+           contA++;contB++;
+       }
         for(int i =0;i<mesa.length;i++) {
 
             if (p == mesa[i].getValor()) contA++;
@@ -47,6 +50,14 @@ public class Mesa {
         //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
         if(contA==3 || contB==3)return 3;
         if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
+        //lo que hago a continuacion es para saber si hay escalera
+        int orden[]={p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
+        //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
+        Arrays.sort(orden);
+        for(int i =0; i<orden.length-1;i++){
+            if(orden[i]==orden[i+1])esca++;
+        }
+        if(esca>=5) return 6;
         if(contA==2 || contB==2) return 7;
         if(contA==1 && contB==1)return 8;
         if(contA==1 && contB==0)return 9;
@@ -55,14 +66,7 @@ public class Mesa {
 
 
 
-      //lo que hago a continuacion es para saber si hay escalera
-        int orden[]={p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
-    //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
-         Arrays.sort(orden);
-      for(int i =0; i<orden.length-1;i++){
-            if(orden[i]==orden[i+1])esca++;
-        }
-        if(esca>=5) return 6;
+
 
 
 /*
