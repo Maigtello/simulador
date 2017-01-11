@@ -19,7 +19,7 @@ public class Carta  {
         else valor = v;
     }
     public Carta(String v){
-        if(v.equals("As")) valor = 13;
+        if(v.equals("As")) valor = 14;
         else if(v.equals("K")) valor = 13;
         else if(v.equals("Q")) valor = 12;
         else if(v.equals("J")) valor = 11;
