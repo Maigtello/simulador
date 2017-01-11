@@ -22,7 +22,7 @@ public class Mesa {
     public int verMano(Carta a, Carta b){
         int contA =0;
         int contB=0;
-        int esca=0;
+        int escalera=0;
         int p = a.getValor();
         int s = b.getValor();
         if(p==0 || s==0)return 0;
@@ -51,13 +51,17 @@ public class Mesa {
         if(contA==3 || contB==3)return 3;
         if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
         //lo que hago a continuacion es para saber si hay escalera
-        int orden[]={p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
+        int orden[]={-1, p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
         //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
         Arrays.sort(orden);
-        for(int i =0; i<orden.length-1;i++){
-            if(orden[i]==orden[i+1])esca++;
+        if(orden[7]==14){
+            orden[0]=1;
+            //Arrays.sort(orden);
         }
-        if(esca>=5) return 6;
+        for(int i =0; i<orden.length-1;i++){
+            if((orden[i]+1)==orden[i+1])escalera++;
+        }
+        if(escalera>=5) return 6;
         if(contA==2 || contB==2) return 7;
         if(contA==1 && contB==1)return 8;
         if(contA==1 && contB==0)return 9;

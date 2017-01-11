@@ -58,80 +58,47 @@ public class MainActivity extends AppCompatActivity {
 
 
       //la intencion es dar el valor de los sppiner a las cartas.
-        if(comprobar(spinner0)) {
+        jugador1A.setValor(obtenerValor(spinner0));
+        //int a=jugador1A.getValor();
+        //System.out.println(a);
+        jugador1B.setValor(obtenerValor(spinner1));
 
-            jugador1A.setValor((String) spinner0.getSelectedItem());
-            //int a= jugador1A.getValor();
-            //System.out.println(a);
-        }
-            else {
+        jugador2A.setValor(obtenerValor(spinner2));
 
-            jugador1A.setValor((Integer) spinner0.getSelectedItem());
-            //int b= jugador1A.getValor();
-            //System.out.println(b);
-        }
-        if(comprobar(spinner1)) {
-            jugador1B.setValor((String) spinner1.getSelectedItem());
-        }
-        else {
-            jugador1B.setValor((Integer) spinner1.getSelectedItem());
-        }
-        if(comprobar(spinner2)) {
-            jugador2A.setValor((String) spinner2.getSelectedItem());
-        }
-        else {
-            jugador2A.setValor((Integer) spinner2.getSelectedItem());
-        }
-        if(comprobar(spinner3)) {
-            jugador2B.setValor((String) spinner3.getSelectedItem());
-        }
-        else {
-            jugador2B.setValor((Integer) spinner3.getSelectedItem());
-        }
-        if(comprobar(spinner4)) {
-            mesaA.setValor((String) spinner4.getSelectedItem());
-        }
-        else {
-            mesaA.setValor((Integer) spinner4.getSelectedItem());
-        }
-        if(comprobar(spinner5)) {
-            mesaB.setValor((String) spinner5.getSelectedItem());
-        }
-        else {
-            mesaB.setValor((Integer) spinner5.getSelectedItem());
-        }
-        if(comprobar(spinner6)) {
-            mesaC.setValor((String) spinner6.getSelectedItem());
-        }
-        else {
-           mesaC.setValor((Integer) spinner6.getSelectedItem());
-        }
-        if(comprobar(spinner7)) {
-            mesaD.setValor((String) spinner7.getSelectedItem());
-        }
-        else {
-            mesaD.setValor((Integer) spinner7.getSelectedItem());
-        }
-        if(comprobar(spinner8)) {
-            mesaE.setValor((String) spinner8.getSelectedItem());
-        }
-        else {
-            mesaE.setValor((Integer) spinner8.getSelectedItem());
-        }
+        jugador2B.setValor(obtenerValor(spinner3));
+
+        mesaA.setValor(obtenerValor(spinner4));
+
+        mesaB.setValor(obtenerValor(spinner5));
+
+        mesaC.setValor(obtenerValor(spinner6));
+
+        mesaD.setValor(obtenerValor(spinner7));
+
+        mesaE.setValor(obtenerValor(spinner8));
+
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
 
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
         int puntA= mesa.verMano(jugador1A,jugador1B);
         int puntB =mesa.verMano(jugador2A,jugador2B);
-        if(puntA ==0 || puntB==0) pantalla="Error";
-        if(puntA>puntB) pantalla="Gana el jugador B";
-        else if(puntA<puntB) pantalla="Gana el jugador A";
+
+        if(puntA>puntB) pantalla="Gana el jugador 2";
+        else if(puntA<puntB) pantalla="Gana el jugador 1";
        // else pantalla="Empate";
 
         textViewR.setText(pantalla);
     }
-    private boolean comprobar(Spinner s){
-         return s.getSelectedItem() instanceof String;
+    private int obtenerValor(Spinner s){
+        int valor;
+        String v = (String) s.getSelectedItem();
+        if(v.equals("As")) valor = 14;
+        else if(v.equals("K")) valor = 13;
+        else if(v.equals("Q")) valor = 12;
+        else if(v.equals("J")) valor = 11;
+        else valor= Integer.parseInt(v);
+
+        return valor;
 
     }
     /*private String ganador(Carta a, Carta b, Carta c, Carta d, Mesa m){

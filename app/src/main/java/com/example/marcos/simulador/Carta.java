@@ -33,11 +33,5 @@ public class Carta  {
         valor = v;
     }
     public void setPalo(String p) { palo=p; }
-    public void setValor(String v){
-        if(v.equals("As")) valor = 14;
-        else if(v.equals("K")) valor = 13;
-        else if(v.equals("Q")) valor = 12;
-        else if(v.equals("J")) valor = 11;
-        else valor=0;
-    }
+
 }
