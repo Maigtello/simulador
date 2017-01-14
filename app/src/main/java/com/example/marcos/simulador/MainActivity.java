@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
             spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
     private Button buttonCalcular;
     private TextView textViewR;
-    private String pantalla="Empate";
+    private String pantalla="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(puntA>puntB) pantalla="Gana el jugador 2";
         else if(puntA<puntB) pantalla="Gana el jugador 1";
-       // else pantalla="Empate";
+        else pantalla="Empate";
 
         textViewR.setText(pantalla);
     }
