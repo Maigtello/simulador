@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">simulador</string>
+    <string name="app_name">Simulador</string>
     <string-array name="cartas">
         <item>As</item>
         <item>2</item>
