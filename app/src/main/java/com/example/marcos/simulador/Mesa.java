@@ -49,8 +49,7 @@ public class Mesa {
         }
         //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
         if(contA==3 || contB==3)return 3;
-        if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
-        //lo que hago a continuacion es para saber si hay escalera
+        if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;      //lo que hago a continuacion es para saber si hay escalera
         int orden[]={-1, p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
         //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
         Arrays.sort(orden);

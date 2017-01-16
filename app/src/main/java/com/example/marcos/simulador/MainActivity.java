@@ -85,8 +85,25 @@ public class MainActivity extends AppCompatActivity {
 
         if(puntA>puntB) pantalla="Gana el jugador 2";
         else if(puntA<puntB) pantalla="Gana el jugador 1";
-        else pantalla="Empate";
-
+        //para determinar quien gana cuando tienen carta alta los 2 jugadores
+        else if(puntA==10 && puntB==10){
+            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Gana el jugador 1";
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Gana el jugador 1";
+            else pantalla="Gana el jugador 2";
+        }
+        else {
+            if(jugador1A.getValor()==jugador1B.getValor() && jugador2A.getValor()==jugador2B.getValor()){
+                if(jugador1A.getValor()<jugador2A.getValor()) pantalla ="Gana el jugador 2";
+                else if(jugador1A.getValor()>jugador2A.getValor()) pantalla ="Gana el jugador 1";
+                else pantalla="Empate";
+            }
+            //HAY QUE CAMBIAR ALGO PORQUE NO FUCIONA BIEN. YO LO HARIA CON MATH.MAX Y MATH.MIN
+            else if(jugador1A.getValor()<jugador2A.getValor() && jugador1A.getValor()<jugador2B.getValor() && jugador1B.getValor()<jugador2A.getValor() && jugador1B.getValor()<jugador2B.getValor()) pantalla ="Gana el jugador 2";
+            //else if(jugador1B.getValor()<jugador2A.getValor() && jugador1B.getValor()<jugador2B.getValor()) pantalla ="Gana el jugador 2";
+            else if(jugador1A.getValor()>jugador2A.getValor() && jugador1B.getValor()>jugador2A.getValor() && jugador1A.getValor()>jugador2B.getValor() && jugador1B.getValor()>jugador2B.getValor()) pantalla ="Gana el jugador 1";
+            //else if(jugador1A.getValor()>jugador2B.getValor() && jugador1B.getValor()>jugador2B.getValor()) pantalla ="Gana el jugador 1";
+            //pantalla = "Empate";
+        }
         textViewR.setText(pantalla);
     }
     private int obtenerValor(Spinner s){
