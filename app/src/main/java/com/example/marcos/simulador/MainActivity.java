@@ -83,25 +83,25 @@ public class MainActivity extends AppCompatActivity {
         int puntA= mesa.verMano(jugador1A,jugador1B);
         int puntB =mesa.verMano(jugador2A,jugador2B);
 
-        if(puntA>puntB) pantalla="Gana el jugador 2";
-        else if(puntA<puntB) pantalla="Gana el jugador 1";
+        if(puntA>puntB) pantalla="Player 2 wins";
+        else if(puntA<puntB) pantalla="Player 1 wins";
         //para determinar quien gana cuando tienen carta alta los 2 jugadores
         else if(puntA==10 && puntB==10){
-            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Gana el jugador 1";
-            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Gana el jugador 1";
-            else pantalla="Gana el jugador 2";
+            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
+            else pantalla="Player 2 wins";
         }
         else {
             if(jugador1A.getValor()==jugador1B.getValor() && jugador2A.getValor()==jugador2B.getValor()){
-                if(jugador1A.getValor()<jugador2A.getValor()) pantalla ="Gana el jugador 2";
-                else if(jugador1A.getValor()>jugador2A.getValor()) pantalla ="Gana el jugador 1";
-                else pantalla="Empate";
+                if(jugador1A.getValor()<jugador2A.getValor()) pantalla ="Player 2 wins";
+                else if(jugador1A.getValor()>jugador2A.getValor()) pantalla ="Player 1 wins";
+                else pantalla="It's a draw!";
             }
             //HAY QUE CAMBIAR ALGO PORQUE NO FUCIONA BIEN. YO LO HARIA CON MATH.MAX Y MATH.MIN
-            else if(jugador1A.getValor()<jugador2A.getValor() && jugador1A.getValor()<jugador2B.getValor() && jugador1B.getValor()<jugador2A.getValor() && jugador1B.getValor()<jugador2B.getValor()) pantalla ="Gana el jugador 2";
+            else if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla ="Player 1 wins";
             //else if(jugador1B.getValor()<jugador2A.getValor() && jugador1B.getValor()<jugador2B.getValor()) pantalla ="Gana el jugador 2";
-            else if(jugador1A.getValor()>jugador2A.getValor() && jugador1B.getValor()>jugador2A.getValor() && jugador1A.getValor()>jugador2B.getValor() && jugador1B.getValor()>jugador2B.getValor()) pantalla ="Gana el jugador 1";
-            //else if(jugador1A.getValor()>jugador2B.getValor() && jugador1B.getValor()>jugador2B.getValor()) pantalla ="Gana el jugador 1";
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla ="Player 1 wins";
+            else pantalla="Player 2 wins.";
             //pantalla = "Empate";
         }
         textViewR.setText(pantalla);
