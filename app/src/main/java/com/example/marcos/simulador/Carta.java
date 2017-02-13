@@ -6,6 +6,7 @@ package com.example.marcos.simulador;
 
 public class Carta  {
     private int valor;
+    //hay 4 tipos de palo: Clubs,Hearts, Diamonds y Spades
     private String palo;
     //de momento las cartas solo tienen valor, falta asignarles un palo
 
@@ -24,6 +25,7 @@ public class Carta  {
         else if(v.equals("Q")) valor = 12;
         else if(v.equals("J")) valor = 11;
         else valor=0;
+        this.palo=palo;
     }
     public int getValor(){
         return valor;

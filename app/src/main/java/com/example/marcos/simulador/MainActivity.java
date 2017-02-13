@@ -1,5 +1,6 @@
 package com.example.marcos.simulador;
 
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,51 +60,66 @@ public class MainActivity extends AppCompatActivity {
 
       //la intencion es dar el valor de los sppiner a las cartas.
         jugador1A.setValor(obtenerValor(spinner0));
-        //int a=jugador1A.getValor();
-        //System.out.println(a);
+        jugador1A.setPalo((String)spinner9.getSelectedItem());
+
+        //String a=jugador1A.getPalo();
+       // System.out.println(a);
+
         jugador1B.setValor(obtenerValor(spinner1));
+        jugador1B.setPalo((String)spinner10.getSelectedItem());
 
         jugador2A.setValor(obtenerValor(spinner2));
+        jugador2A.setPalo((String)spinner11.getSelectedItem());
 
         jugador2B.setValor(obtenerValor(spinner3));
+        jugador2B.setPalo((String)spinner12.getSelectedItem());
 
         mesaA.setValor(obtenerValor(spinner4));
+        mesaA.setPalo((String)spinner13.getSelectedItem());
 
         mesaB.setValor(obtenerValor(spinner5));
+        mesaB.setPalo((String)spinner14.getSelectedItem());
 
         mesaC.setValor(obtenerValor(spinner6));
+        mesaC.setPalo((String)spinner15.getSelectedItem());
 
         mesaD.setValor(obtenerValor(spinner7));
+        mesaD.setPalo((String)spinner16.getSelectedItem());
 
         mesaE.setValor(obtenerValor(spinner8));
+        mesaE.setPalo((String)spinner17.getSelectedItem());
 
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
 
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
         int puntA= mesa.verMano(jugador1A,jugador1B);
         int puntB =mesa.verMano(jugador2A,jugador2B);
-
+        System.out.println("puntA " + puntA + " puntB "+ puntB);
         if(puntA>puntB) pantalla="Player 2 wins";
         else if(puntA<puntB) pantalla="Player 1 wins";
         //para determinar quien gana cuando tienen carta alta los 2 jugadores
-        else if(puntA==10 && puntB==10){
+        else if(puntA==puntB){
             if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
             else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
-            else pantalla="Player 2 wins";
+            else if(Math.max(jugador1A.getValor(),jugador1B.getValor())<Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins";
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())<Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins";
+            else pantalla="It's a draw!";
         }
-        else {
+        /*else {
             if(jugador1A.getValor()==jugador1B.getValor() && jugador2A.getValor()==jugador2B.getValor()){
                 if(jugador1A.getValor()<jugador2A.getValor()) pantalla ="Player 2 wins";
                 else if(jugador1A.getValor()>jugador2A.getValor()) pantalla ="Player 1 wins";
                 else pantalla="It's a draw!";
             }
+
             //HAY QUE CAMBIAR ALGO PORQUE NO FUCIONA BIEN. YO LO HARIA CON MATH.MAX Y MATH.MIN
             else if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla ="Player 1 wins";
             //else if(jugador1B.getValor()<jugador2A.getValor() && jugador1B.getValor()<jugador2B.getValor()) pantalla ="Gana el jugador 2";
             else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla ="Player 1 wins";
             else pantalla="Player 2 wins.";
             //pantalla = "Empate";
-        }
+
+        }*/
         textViewR.setText(pantalla);
     }
     private int obtenerValor(Spinner s){
@@ -118,12 +134,7 @@ public class MainActivity extends AppCompatActivity {
         return valor;
 
     }
-    /*private String ganador(Carta a, Carta b, Carta c, Carta d, Mesa m){
 
-        Switch(valor){
-            Case1:
 
-        }
 
-    }*/
 }
