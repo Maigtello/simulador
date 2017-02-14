@@ -23,7 +23,7 @@ public class Mesa {
     public int verMano(Carta a, Carta b){
         int contA =0;
         int contB=0;
-        int color=0;
+        boolean color=false;
         int escalera=0;
         boolean poker=false;
         //p y s valor primera y segunda carta del jugador
@@ -36,6 +36,7 @@ public class Mesa {
         Boolean pareja = p==s;
 
         int orden[]={-1, p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
+        String colorA[]={a.getPalo(),b.getPalo(),mesa[0].getPalo(),mesa[1].getPalo(),mesa[2].getPalo(),mesa[3].getPalo(),mesa[4].getPalo()};
         //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
         Arrays.sort(orden);
         if(orden[7]==14){
@@ -50,7 +51,7 @@ public class Mesa {
 
 
         int contador[]= new int[15];
-        int colorA[]= new int[4];
+
 
         for(int i=1;i<orden.length;i++){
             if(contador[orden[i]]==0)contador[orden[i]]++;
@@ -63,13 +64,23 @@ public class Mesa {
             else if(contador[i]>3)poker=true;
         }
 
-        if(c1.equals(c2))color++;
-        for(int i =0;i<mesa.length;i++) {
+        //if(c1.equals(c2))color++;
+
+        //hay 4 tipos de palo: Clubs,Hearts, Diamonds y Spades
+        int Clubs=0,Hearts=0, Diamonds =0, Spades=0;
+
+        for(int i =0;i<colorA.length;i++) {
+            if(colorA[i].equals("Clubs"))Clubs++;
+            else if(colorA[i].equals("Hearts"))Hearts++;
+            else if(colorA[i].equals("Diamonds"))Diamonds++;
+            else if(colorA[i].equals("Spades"))Spades++;
 
 
-            if(c1.equals(mesa[i].getPalo()) || c2.equals(mesa[i].getPalo()) )color++;
+
+            //if(c1.equals(mesa[i].getPalo()) || c2.equals(mesa[i].getPalo()) )color++;
 
         }
+        if(Clubs>=5||Hearts>=5||Diamonds>=5||Spades>=5)color =true;
 
 
         //for(int i =0; i<orden.length;i++){
@@ -78,7 +89,7 @@ public class Mesa {
         boolean real=true;
         //System.out.println(orden);
 
-        if(color>=4 && escalera>=4) {
+        if(color && escalera>=4) {
             if(orden[7]==14){
                 for(int i = orden.length-1; i>0 && orden[i-1]>9 ;i--) {
                     //System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
@@ -94,7 +105,7 @@ public class Mesa {
         if(poker)return 3;
         if(contA>=1 && contB==1)return 4;
 
-        if(color>=4) return 5;
+        if(color) return 5;
 
         if(escalera>=4) return 6;
         if(contB==1 && contA==0) return 7;
