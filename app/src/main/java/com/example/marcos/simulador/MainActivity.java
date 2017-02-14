@@ -95,8 +95,33 @@ public class MainActivity extends AppCompatActivity {
         int puntA= mesa.verMano(jugador1A,jugador1B);
         int puntB =mesa.verMano(jugador2A,jugador2B);
         System.out.println("puntA " + puntA + " puntB "+ puntB);
-        if(puntA>puntB) pantalla="Player 2 wins";
-        else if(puntA<puntB) pantalla="Player 1 wins";
+        String a = "";
+        String b = "";
+        if (puntA == 10) a = "high card";
+        if (puntA == 9) a = "pair";
+        if (puntA == 8) a = "double pair";
+        if (puntA == 7) a = "three of a kind";
+        if (puntA == 6) a = "straight";
+        if (puntA == 5) a = "flush";
+        if (puntA == 4) a = "full house";
+        if (puntA == 3) a = "poker";
+        if (puntA == 2) a = "straight flush";
+        if (puntA == 1) a = "royal flush";
+        if (puntB == 10) b = "high card";
+        if (puntB == 9) b = "pair";
+        if (puntB == 8) b = "double pair";
+        if (puntB == 7) b = "three of a kind";
+        if (puntB == 6) b = "straight";
+        if (puntB == 5) b = "flush";
+        if (puntB == 4) b = "full house";
+        if (puntB == 3) b = "poker";
+        if (puntB == 2) b = "straight flush";
+        if (puntB == 1) b = "royal flush";
+        if(puntA>puntB) {
+            pantalla = "Player 2 wins with a " + b + " against a " + a;
+        }
+
+        else if(puntA<puntB) pantalla="Player 1 wins with a " + a + " against a " + b;
         //para determinar quien gana cuando tienen carta alta los 2 jugadores
         else if(puntA==puntB){
             if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
@@ -134,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         return valor;
 
     }
+
 
 
 
