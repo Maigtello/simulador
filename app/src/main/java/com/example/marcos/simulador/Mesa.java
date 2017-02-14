@@ -1,4 +1,5 @@
 package com.example.marcos.simulador;
+import java.util.ArrayList;
 import java.util.Arrays;
 /**
  * Created by Marcos on 17/12/2016.
@@ -24,6 +25,7 @@ public class Mesa {
         int contB=0;
         int color=0;
         int escalera=0;
+        boolean poker=false;
         //p y s valor primera y segunda carta del jugador
         int p = a.getValor();
         int s = b.getValor();
@@ -46,19 +48,29 @@ public class Mesa {
         }
 
 
-       if(pareja){
-           contA++;contB++;
-       }
+
+        int contador[]= new int[15];
+        int colorA[]= new int[4];
+
+        for(int i=1;i<orden.length;i++){
+            if(contador[orden[i]]==0)contador[orden[i]]++;
+            if((orden[i-1])==orden[i]) contador[orden[i]]++;
+        }
+        for(int i=0;i<contador.length;i++){
+            System.out.println(i+" hay " +contador[i]);
+            if(contador[i]==2)contA++;
+            else if(contador[i]==3)contB++;
+            else if(contador[i]>3)poker=true;
+        }
 
         if(c1.equals(c2))color++;
-
         for(int i =0;i<mesa.length;i++) {
 
-            if (p == mesa[i].getValor()) contA++;
-            if (s == mesa[i].getValor()) contB++;
+
             if(c1.equals(mesa[i].getPalo()) || c2.equals(mesa[i].getPalo()) )color++;
 
         }
+
 
         //for(int i =0; i<orden.length;i++){
            // System.out.println(i + " == " + orden[i]);
@@ -69,7 +81,7 @@ public class Mesa {
         if(color>=4 && escalera>=4) {
             if(orden[7]==14){
                 for(int i = orden.length-1; i>0 && orden[i-1]>9 ;i--) {
-                    System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
+                    //System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
                     if(orden[i]==orden[i-1] || orden[i]==(orden[i-1]+1)) System.out.println(i + " == " + orden[i]);
                     else real=false;
 
@@ -79,34 +91,17 @@ public class Mesa {
             else return 2;
         }
         //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
-        if(contA==3 || contB==3)return 3;
-        if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
+        if(poker)return 3;
+        if(contA>=1 && contB==1)return 4;
 
         if(color>=4) return 5;
 
-        //lo que hago a continuacion es para saber si hay escalera
-        /*int orden[]={-1, p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
-        //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
-        Arrays.sort(orden);
-        if(orden[7]==14){
-            orden[0]=1;
-            //Arrays.sort(orden);
-        }
-        /*for(int i =0; i<orden.length-1;i++){
-            if((orden[i]+1)==orden[i+1])escalera++;
-        }*/
         if(escalera>=4) return 6;
-        if(contA==2 || contB==2) return 7;
-        if(contA==1 && contB==1)return 8;
-        if((contA==1 && contB==0) || (contB==1 && contA==0) || pareja)return 9;
+        if(contB==1 && contA==0) return 7;
+        if(contA==2 && contB==0)return 8;
+        if((contA==1 && contB==0) )return 9;
 
-
-
-
-
-
-
-
+        return 10;
 /*
 Esta es la lista de int que tiene que devolver segun el caso;
 1 	Escalera real o flor imperial
@@ -120,7 +115,7 @@ Esta es la lista de int que tiene que devolver segun el caso;
 9 	Pareja
 10 	Carta alta
  */
-        return 10;
+
     }
 
 }
