@@ -40,8 +40,11 @@ public class Mesa {
             orden[0]=1;
             //Arrays.sort(orden);
         }
-        for(int i =1; i<orden.length-1;i++){
-            if((orden[i]+1)==orden[i+1])escalera++;
+        for(int i =0; i<orden.length-1;i++){
+            if((orden[i]+1)==orden[i+1]){
+                if((orden[i+1]+1)==orden[i+2])escalera++;
+            }
+
         }
 
 
