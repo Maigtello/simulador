@@ -40,7 +40,7 @@ public class Mesa {
             orden[0]=1;
             //Arrays.sort(orden);
         }
-        for(int i =0; i<orden.length-1;i++){
+        for(int i =1; i<orden.length-1;i++){
             if((orden[i]+1)==orden[i+1])escalera++;
         }
 
@@ -63,7 +63,7 @@ public class Mesa {
         boolean real=true;
         //System.out.println(orden);
 
-        if(color>=4 && escalera>=4) {
+        if(color>=4) {
             if(orden[7]==14){
                 for(int i = orden.length-1; i>0 && orden[i-1]>9 ;i--) {
                     System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
@@ -72,9 +72,9 @@ public class Mesa {
 
                 }
             }
-            if(real) return 1;
-            else return 2;
+            else return 1;
         }
+        if(color>=4 && escalera>=4) return 2;
         //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
         if(contA==3 || contB==3)return 3;
         if((contA==1 && contB==2) || (contA==2&&contB==1))return 4;
