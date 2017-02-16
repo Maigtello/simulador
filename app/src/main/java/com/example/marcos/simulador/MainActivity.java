@@ -124,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
         else if(puntA<puntB) pantalla="Player 1 wins with a " + a + " against a " + b;
         //para determinar quien gana cuando tienen carta alta los 2 jugadores
         else if(puntA==puntB){
-            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
-            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins";
-            else if(Math.max(jugador1A.getValor(),jugador1B.getValor())<Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins";
-            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())<Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins";
-            else pantalla="It's a draw!";
+
+            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins with a higher " + a;
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins with a higher " + a;
+            else if(Math.max(jugador1A.getValor(),jugador1B.getValor())<Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins with a higher " + b;
+            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())<Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins with a higher" + b;
+            else pantalla="It's a draw! Both players have " + a + ".";
         }
         /*else {
             if(jugador1A.getValor()==jugador1B.getValor() && jugador2A.getValor()==jugador2B.getValor()){
