@@ -46,6 +46,7 @@ public class Mesa {
 
         if(orden[7].getValor()==14){
             orden[0].setValor(1);
+            orden[0].setPalo(orden[7].getPalo());
             //Arrays.sort(orden);
         }
         for(int i =0; i<orden.length-1 && escalera<4;i++){
@@ -93,7 +94,7 @@ public class Mesa {
             if(orden[7].getValor()==14){
                 for(int i = orden.length-1; i>0 && orden[i-1].getValor()>9; i--) {
                     //System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
-                    if(orden[i].getValor()==orden[i-1].getValor() || orden[i].getValor()==(orden[i-1].getValor()+1) && orden[i].getPalo().equals(orden[i-1].getPalo())){
+                    if((orden[i].getValor()==orden[i-1].getValor() || orden[i].getValor()==(orden[i-1].getValor()+1)) && orden[i].getPalo().equals(orden[i-1].getPalo())){
 
                         //System.out.println(i + " == " + orden[i]);
                     }
@@ -106,7 +107,7 @@ public class Mesa {
         }
         //si contA o B tiene un 1 significa que tiene 2 cartas iguales y asi sucesivamente
         if(poker)return 3;
-        if(contA>=1 && contB==1)return 4;
+        if((contA>=1 && contB>=1) ||contB>1)return 4;
 
         if(color) return 5;
 
