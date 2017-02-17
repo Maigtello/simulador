@@ -4,7 +4,7 @@ package com.example.marcos.simulador;
  * Created by Marcos on 17/12/2016.
  */
 
-public class Carta  {
+public class Carta implements Comparable<Carta> {
     private int valor;
     //hay 4 tipos de palo: Clubs,Hearts, Diamonds y Spades
     private String palo;
@@ -35,5 +35,13 @@ public class Carta  {
         valor = v;
     }
     public void setPalo(String p) { palo=p; }
+
+    @Override
+    public int compareTo(Carta c){
+        if(valor<c.getValor())return -1;
+        else if(valor>c.getValor())return 1;
+        else return 0;
+
+    }
 
 }
