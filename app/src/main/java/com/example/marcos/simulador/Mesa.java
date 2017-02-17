@@ -35,17 +35,17 @@ public class Mesa {
         if(p==0 || s==0)return 0;
         Boolean pareja = p==s;
 
-        Carta orden[]={null, a,b,mesa[0],mesa[1],mesa[2],mesa[3],mesa[4]};
+        int orden[]={-1, p,s,mesa[0].getValor(),mesa[1].getValor(),mesa[2].getValor(),mesa[3].getValor(),mesa[4].getValor()};
         String colorA[]={a.getPalo(),b.getPalo(),mesa[0].getPalo(),mesa[1].getPalo(),mesa[2].getPalo(),mesa[3].getPalo(),mesa[4].getPalo()};
         //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
         Arrays.sort(orden);
 
-        if(orden[7].getValor()==14){
-            orden[0].setValor(1);
+        if(orden[7]==14){
+            orden[0]=1;
             //Arrays.sort(orden);
         }
         for(int i =0; i<orden.length-1 && escalera<4;i++){
-            if((orden[i].getValor()+1)==orden[i+1].getValor())escalera++;
+            if((orden[i]+1)==orden[i+1])escalera++;
             else escalera=0;
         }
 
@@ -55,8 +55,8 @@ public class Mesa {
 
 
         for(int i=1;i<orden.length;i++){
-            if(contador[orden[i].getValor()]==0)contador[orden[i].getValor()]++;
-            if((orden[i-1].getValor())==orden[i].getValor()) contador[orden[i].getValor()]++;
+            if(contador[orden[i]]==0)contador[orden[i]]++;
+            if((orden[i-1])==orden[i]) contador[orden[i]]++;
         }
         for(int i=0;i<contador.length;i++){
             System.out.println(i+" hay " +contador[i]);
@@ -85,10 +85,10 @@ public class Mesa {
         //System.out.println(orden);
 
         if(color && escalera>=4) {
-            if(orden[7].getValor()==14){
-                for(int i = orden.length-1; i>0 && orden[i-1].getValor()>9; i--) {
+            if(orden[7]==14){
+                for(int i = orden.length-1; i>0 && orden[i-1]>9; i--) {
                     //System.out.println(i +" " + orden[i]+ " " +orden[i-1] );
-                    if(orden[i].getValor()==orden[i-1].getValor() || orden[i].getValor()==(orden[i-1].getValor()+1) && orden[i].getPalo().equals(orden[i-1].getPalo())){
+                    if(orden[i]==orden[i-1] || orden[i]==(orden[i-1]+1)){
 
                         //System.out.println(i + " == " + orden[i]);
                     }
