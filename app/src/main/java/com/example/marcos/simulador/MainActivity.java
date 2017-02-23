@@ -1,12 +1,17 @@
 package com.example.marcos.simulador;
 
+import android.content.Intent;
 import android.provider.Settings;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Switch;
+
+
 import android.widget.TextView;
 
 
@@ -14,13 +19,29 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinner0,spinner1,spinner2,spinner3,spinner4,spinner5,spinner6,spinner7,spinner8,
             spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
+    private TabLayout.Tab aboutTab;
     private Button buttonCalcular;
     private TextView textViewR;
     private String pantalla="";
+    TabLayout tabs;
+    ViewPager viewPager;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar=(Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("Simulator"));
+        tabs.addTab(tabs.newTab().setText("Settings"));
+        tabs.addTab(tabs.newTab().setText("About"));
+
+
+
         //jugador1
         spinner0 = (Spinner) findViewById(R.id.spinner0);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -160,6 +181,11 @@ public class MainActivity extends AppCompatActivity {
         return valor;
 
     }
+
+    /*public void aboutClick(View view){
+        Intent i=new Intent(this, About.class);
+        startActivity(i);
+    }*/
 
 
 
