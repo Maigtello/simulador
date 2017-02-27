@@ -201,7 +201,7 @@
                         android:id="@+id/spinner9"
                         android:entries="@array/palo"
                         android:layout_alignParentTop="true"
-                        android:layout_toEndOf="@+id/spinner13" />
+                        />
 
                     <Spinner
                         android:layout_height="wrap_content"
