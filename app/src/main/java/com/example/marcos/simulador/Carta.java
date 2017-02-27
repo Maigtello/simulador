@@ -43,5 +43,4 @@ public class Carta implements Comparable<Carta> {
         else return 0;
 
     }
-
 }

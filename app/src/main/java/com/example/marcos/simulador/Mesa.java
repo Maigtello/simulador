@@ -1,5 +1,5 @@
 package com.example.marcos.simulador;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 /**
  * Created by Marcos on 17/12/2016.
@@ -39,6 +39,7 @@ public class Mesa {
         Carta  aux = new Carta();
 
         Carta orden[]={aux, a,b,mesa[0],mesa[1],mesa[2],mesa[3],mesa[4]};
+
         String colorA[]={a.getPalo(),b.getPalo(),mesa[0].getPalo(),mesa[1].getPalo(),mesa[2].getPalo(),mesa[3].getPalo(),mesa[4].getPalo()};
         //arrays.sort ordena el array, lo hago para saber si son numeros consecutivos
         Arrays.sort(orden);

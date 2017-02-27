@@ -1,18 +1,17 @@
 package com.example.marcos.simulador;
 
-import android.content.Intent;
-import android.provider.Settings;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.Spinner;
-
-
 import android.widget.TextView;
+import android.support.v4.view.ViewPager;
+
+import java.lang.reflect.Field;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,24 +22,42 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonCalcular;
     private TextView textViewR;
     private String pantalla="";
-    TabLayout tabs;
-    ViewPager viewPager;
-    Toolbar toolbar;
+
+    private Adaptador_ViewPagerPrincipal Adaptador_ViewPagerPrincipal;
+    private ViewPager ViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_principal);
 
-        toolbar=(Toolbar) findViewById(R.id.toolbar);
+        // Iniciamos la barra de herramientas.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.ToolbarPrincipal);
         setSupportActionBar(toolbar);
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("Simulator"));
-        tabs.addTab(tabs.newTab().setText("Settings"));
-        tabs.addTab(tabs.newTab().setText("About"));
+        // Iniciamos la barra de tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.TabLayoutPrincipal);
 
+// Añadimos las 3 tabs de las secciones.
+// Le damos modo "fixed" para que todas las tabs tengan el mismo tamaño. También le asignamos una gravedad centrada.
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
+
+        // Iniciamos el viewPager.
+        ViewPager = (ViewPager) findViewById(R.id.ViewPagerPrincipal);
+
+// Creamos el adaptador, al cual le pasamos por parámtro el gestor de Fragmentos y muy importante, el nº de tabs o secciones que hemos creado.
+        Adaptador_ViewPagerPrincipal = new Adaptador_ViewPagerPrincipal(getSupportFragmentManager(),tabLayout.getTabCount());
+
+// Y los vinculamos.
+        ViewPager.setAdapter(Adaptador_ViewPagerPrincipal);
+
+        // Y por último, vinculamos el viewpager con el control de tabs para sincronizar ambos.
+        tabLayout.setupWithViewPager(ViewPager);
 
         //jugador1
         spinner0 = (Spinner) findViewById(R.id.spinner0);
@@ -111,47 +128,71 @@ public class MainActivity extends AppCompatActivity {
         mesaE.setPalo((String)spinner17.getSelectedItem());
 
         Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
+        Carta cartas[]={jugador1A,jugador1B,jugador2A,jugador2B,mesaA,mesaB,mesaC,mesaD,mesaE};
+        boolean cartasIguales=false;
 
+        for(int i=0;i<cartas.length-1; i++){
+            System.out.println(cartas[i]);
+            for (int j = 0; j< cartas.length -1; j++){
+
+                System.out.println(cartas[j]);
+                if (j != i) {
+                    if(cartas[i].getPalo()==cartas[j].getPalo() && cartas[i].getValor()==cartas[j].getValor()){
+                        cartasIguales=true;
+                    }
+                }
+
+            }
+        }
+        System.out.println(cartasIguales);
+        if(cartasIguales){
+            System.out.println("WHYYYYYYYYYYYY");
+            textViewR.setText("There can't be cards with the same value.");
+
+        }
+        else {
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
-        int puntA= mesa.verMano(jugador1A,jugador1B);
-        int puntB =mesa.verMano(jugador2A,jugador2B);
-        System.out.println("puntA " + puntA + " puntB "+ puntB);
-        String a = "";
-        String b = "";
-        if (puntA == 10) a = "high card";
-        if (puntA == 9) a = "pair";
-        if (puntA == 8) a = "double pair";
-        if (puntA == 7) a = "three of a kind";
-        if (puntA == 6) a = "straight";
-        if (puntA == 5) a = "flush";
-        if (puntA == 4) a = "full house";
-        if (puntA == 3) a = "poker";
-        if (puntA == 2) a = "straight flush";
-        if (puntA == 1) a = "royal flush";
-        if (puntB == 10) b = "high card";
-        if (puntB == 9) b = "pair";
-        if (puntB == 8) b = "double pair";
-        if (puntB == 7) b = "three of a kind";
-        if (puntB == 6) b = "straight";
-        if (puntB == 5) b = "flush";
-        if (puntB == 4) b = "full house";
-        if (puntB == 3) b = "poker";
-        if (puntB == 2) b = "straight flush";
-        if (puntB == 1) b = "royal flush";
-        if(puntA>puntB) {
-            pantalla = "Player 2 wins with a " + b + " against a " + a;
-        }
+            int puntA = mesa.verMano(jugador1A, jugador1B);
+            int puntB = mesa.verMano(jugador2A, jugador2B);
+            System.out.println("puntA " + puntA + " puntB " + puntB);
+            String a = "";
+            String b = "";
+            if (puntA == 10) a = "high card";
+            if (puntA == 9) a = "pair";
+            if (puntA == 8) a = "double pair";
+            if (puntA == 7) a = "three of a kind";
+            if (puntA == 6) a = "straight";
+            if (puntA == 5) a = "flush";
+            if (puntA == 4) a = "full house";
+            if (puntA == 3) a = "poker";
+            if (puntA == 2) a = "straight flush";
+            if (puntA == 1) a = "royal flush";
+            if (puntB == 10) b = "high card";
+            if (puntB == 9) b = "pair";
+            if (puntB == 8) b = "double pair";
+            if (puntB == 7) b = "three of a kind";
+            if (puntB == 6) b = "straight";
+            if (puntB == 5) b = "flush";
+            if (puntB == 4) b = "full house";
+            if (puntB == 3) b = "poker";
+            if (puntB == 2) b = "straight flush";
+            if (puntB == 1) b = "royal flush";
+            if (puntA > puntB) {
+                pantalla = "Player 2 wins with a " + b + " against a " + a;
+            } else if (puntA < puntB) pantalla = "Player 1 wins with a " + a + " against a " + b;
+                //para determinar quien gana cuando tienen carta alta los 2 jugadores
+            else if (puntA == puntB) {
 
-        else if(puntA<puntB) pantalla="Player 1 wins with a " + a + " against a " + b;
-        //para determinar quien gana cuando tienen carta alta los 2 jugadores
-        else if(puntA==puntB){
-
-            if(Math.max(jugador1A.getValor(),jugador1B.getValor())>Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins with a higher " + a;
-            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())>Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 1 wins with a higher " + a;
-            else if(Math.max(jugador1A.getValor(),jugador1B.getValor())<Math.max(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins with a higher " + b;
-            else if(Math.min(jugador1A.getValor(),jugador1B.getValor())<Math.min(jugador2A.getValor(),jugador2B.getValor())) pantalla="Player 2 wins with a higher" + b;
-            else pantalla="It's a draw! Both players have " + a + ".";
-        }
+                if (Math.max(jugador1A.getValor(), jugador1B.getValor()) > Math.max(jugador2A.getValor(), jugador2B.getValor()))
+                    pantalla = "Player 1 wins with a higher " + a;
+                else if (Math.min(jugador1A.getValor(), jugador1B.getValor()) > Math.min(jugador2A.getValor(), jugador2B.getValor()))
+                    pantalla = "Player 1 wins with a higher " + a;
+                else if (Math.max(jugador1A.getValor(), jugador1B.getValor()) < Math.max(jugador2A.getValor(), jugador2B.getValor()))
+                    pantalla = "Player 2 wins with a higher " + b;
+                else if (Math.min(jugador1A.getValor(), jugador1B.getValor()) < Math.min(jugador2A.getValor(), jugador2B.getValor()))
+                    pantalla = "Player 2 wins with a higher " + b;
+                else pantalla = "It's a draw! Both players have " + a + ".";
+            }
         /*else {
             if(jugador1A.getValor()==jugador1B.getValor() && jugador2A.getValor()==jugador2B.getValor()){
                 if(jugador1A.getValor()<jugador2A.getValor()) pantalla ="Player 2 wins";
@@ -167,7 +208,8 @@ public class MainActivity extends AppCompatActivity {
             //pantalla = "Empate";
 
         }*/
-        textViewR.setText(pantalla);
+            textViewR.setText(pantalla);
+        }
     }
     private int obtenerValor(Spinner s){
         int valor;
@@ -182,12 +224,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void aboutClick(View view){
-        Intent i=new Intent(this, About.class);
-        startActivity(i);
-    }*/
-
-
-
-
+    private void getOverflowMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
