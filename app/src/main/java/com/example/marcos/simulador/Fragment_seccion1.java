@@ -14,7 +14,7 @@ public class Fragment_seccion1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //  "Inflamos" el archivo XML correspondiente a esta sección.
-        return inflater.inflate(R.layout.activity_main,container,false);
+        return inflater.inflate(R.layout.fragment_seccion1,container,false);
     }
 
 }

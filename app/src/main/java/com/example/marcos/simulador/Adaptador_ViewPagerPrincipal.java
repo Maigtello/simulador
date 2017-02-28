@@ -4,11 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by PC on 27/02/2017.
- */
 
 public class Adaptador_ViewPagerPrincipal extends FragmentPagerAdapter {
+
+
     // en esta variable almacenaremos el nº de secciones
     int numeroDeSecciones;
 
@@ -52,11 +51,11 @@ public class Adaptador_ViewPagerPrincipal extends FragmentPagerAdapter {
         switch (position) {
 
             case 0: // siempre empieza desde 0, la primera Tab es 0
-                return "Simulator";
+                return "Sección 1";
             case 1:
-                return "Settings";
+                return "Sección 2";
             case 2:
-                return "About";
+                return "Sección 3";
 
             // si la posición recibida no se corresponde a ninguna sección
             default:
@@ -64,4 +63,5 @@ public class Adaptador_ViewPagerPrincipal extends FragmentPagerAdapter {
         }
 
     }
+
 }
