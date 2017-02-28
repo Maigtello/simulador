@@ -2,8 +2,6 @@ package com.example.marcos.simulador;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.Toolbar;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -16,54 +14,25 @@ import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Spinner spinner0,spinner1,spinner2,spinner3,spinner4,spinner5,spinner6,spinner7,spinner8,
-            spinner9,spinner10,spinner11,spinner12,spinner13,spinner14,spinner15,spinner16,spinner17;
+    private Spinner spinner0, spinner1, spinner2, spinner3, spinner4, spinner5, spinner6, spinner7, spinner8,
+            spinner9, spinner10, spinner11, spinner12, spinner13, spinner14, spinner15, spinner16, spinner17;
     private TabLayout.Tab aboutTab;
     private Button buttonCalcular;
     private TextView textViewR;
-    private String pantalla="";
+    private String pantalla = "";
 
-    private Adaptador_ViewPagerPrincipal Adaptador_ViewPagerPrincipal;
-    private ViewPager ViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Iniciamos la barra de herramientas.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.ToolbarPrincipal);
-        setSupportActionBar(toolbar);
-
-        // Iniciamos la barra de tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.TabLayoutPrincipal);
-
-// Añadimos las 3 tabs de las secciones.
-// Le damos modo "fixed" para que todas las tabs tengan el mismo tamaño. También le asignamos una gravedad centrada.
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-
-        tabLayout.addTab(tabLayout.newTab());
-        tabLayout.addTab(tabLayout.newTab());
-        tabLayout.addTab(tabLayout.newTab());
-
-        // Iniciamos el viewPager.
-        ViewPager = (ViewPager) findViewById(R.id.ViewPagerPrincipal);
-
-// Creamos el adaptador, al cual le pasamos por parámtro el gestor de Fragmentos y muy importante, el nº de tabs o secciones que hemos creado.
-        Adaptador_ViewPagerPrincipal = new Adaptador_ViewPagerPrincipal(getSupportFragmentManager(),tabLayout.getTabCount());
-
-// Y los vinculamos.
-        ViewPager.setAdapter(Adaptador_ViewPagerPrincipal);
-
-        // Y por último, vinculamos el viewpager con el control de tabs para sincronizar ambos.
-        tabLayout.setupWithViewPager(ViewPager);
 
         //jugador1
         spinner0 = (Spinner) findViewById(R.id.spinner0);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner9 =(Spinner) findViewById(R.id.spinner9);
-        spinner10 =(Spinner) findViewById(R.id.spinner10);
+        spinner9 = (Spinner) findViewById(R.id.spinner9);
+        spinner10 = (Spinner) findViewById(R.id.spinner10);
         //jugador2
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner3 = (Spinner) findViewById(R.id.spinner3);
@@ -84,52 +53,53 @@ public class MainActivity extends AppCompatActivity {
         buttonCalcular = (Button) findViewById(R.id.buttonCalcular);
         textViewR = (TextView) findViewById(R.id.textViewResult);
     }
-    public void onClick(View view){
-        Carta jugador1A= new Carta();
+
+    public void onClick(View view) {
+        Carta jugador1A = new Carta();
         Carta jugador1B = new Carta();
         Carta jugador2A = new Carta();
         Carta jugador2B = new Carta();
-        Carta mesaA= new Carta();
+        Carta mesaA = new Carta();
         Carta mesaB = new Carta();
         Carta mesaC = new Carta();
         Carta mesaD = new Carta();
         Carta mesaE = new Carta();
 
 
-      //la intencion es dar el valor de los sppiner a las cartas.
+        //la intencion es dar el valor de los sppiner a las cartas.
         jugador1A.setValor(obtenerValor(spinner0));
-        jugador1A.setPalo((String)spinner9.getSelectedItem());
+        jugador1A.setPalo((String) spinner9.getSelectedItem());
 
         //String a=jugador1A.getPalo();
-       // System.out.println(a);
+        // System.out.println(a);
 
         jugador1B.setValor(obtenerValor(spinner1));
-        jugador1B.setPalo((String)spinner10.getSelectedItem());
+        jugador1B.setPalo((String) spinner10.getSelectedItem());
 
         jugador2A.setValor(obtenerValor(spinner2));
-        jugador2A.setPalo((String)spinner11.getSelectedItem());
+        jugador2A.setPalo((String) spinner11.getSelectedItem());
 
         jugador2B.setValor(obtenerValor(spinner3));
-        jugador2B.setPalo((String)spinner12.getSelectedItem());
+        jugador2B.setPalo((String) spinner12.getSelectedItem());
 
         mesaA.setValor(obtenerValor(spinner4));
-        mesaA.setPalo((String)spinner13.getSelectedItem());
+        mesaA.setPalo((String) spinner13.getSelectedItem());
 
         mesaB.setValor(obtenerValor(spinner5));
-        mesaB.setPalo((String)spinner14.getSelectedItem());
+        mesaB.setPalo((String) spinner14.getSelectedItem());
 
         mesaC.setValor(obtenerValor(spinner6));
-        mesaC.setPalo((String)spinner15.getSelectedItem());
+        mesaC.setPalo((String) spinner15.getSelectedItem());
 
         mesaD.setValor(obtenerValor(spinner7));
-        mesaD.setPalo((String)spinner16.getSelectedItem());
+        mesaD.setPalo((String) spinner16.getSelectedItem());
 
         mesaE.setValor(obtenerValor(spinner8));
-        mesaE.setPalo((String)spinner17.getSelectedItem());
+        mesaE.setPalo((String) spinner17.getSelectedItem());
 
-        Mesa mesa= new Mesa(mesaA,mesaB,mesaC,mesaD,mesaE);
-        Carta cartas[]={jugador1A,jugador1B,jugador2A,jugador2B,mesaA,mesaB,mesaC,mesaD,mesaE};
-        boolean cartasIguales=false;
+        Mesa mesa = new Mesa(mesaA, mesaB, mesaC, mesaD, mesaE);
+        Carta cartas[] = {jugador1A, jugador1B, jugador2A, jugador2B, mesaA, mesaB, mesaC, mesaD, mesaE};
+        boolean cartasIguales = false;
 
         for(int i=0;i<cartas.length-1; i++){
             System.out.println(cartas[i]);
@@ -150,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             textViewR.setText("There can't be cards with the same value.");
 
         }
-        else {
+        else{
         /*pantalla=ganador(jugador1A,jugador1B,jugador2A,jugador2B,mesa);*/
             int puntA = mesa.verMano(jugador1A, jugador1B);
             int puntB = mesa.verMano(jugador2A, jugador2B);
@@ -210,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
             textViewR.setText(pantalla);
         }
+
     }
     private int obtenerValor(Spinner s){
         int valor;
