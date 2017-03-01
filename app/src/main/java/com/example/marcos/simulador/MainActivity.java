@@ -1,47 +1,121 @@
 package com.example.marcos.simulador;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spinner0, spinner1, spinner2, spinner3, spinner4, spinner5, spinner6, spinner7, spinner8,
             spinner9, spinner10, spinner11, spinner12, spinner13, spinner14, spinner15, spinner16, spinner17;
-    private TabLayout.Tab aboutTab;
+
     private Button buttonCalcular;
     private TextView textViewR;
     private String pantalla = "";
-    private String[] mPlanetTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-
+    private Toolbar appbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Iniciamos la barra de herramientas.
 
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        appbar = (Toolbar)findViewById(R.id.appbar);
+        setSupportActionBar(appbar);
 
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        /*
+        //Eventos del Drawer Layout
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+        */
+
+        navView = (NavigationView)findViewById(R.id.navview);
+        navView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        boolean fragmentTransaction = false;
+                        Fragment fragment = null;
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu_seccion_1:
+                                fragment = new Fragment1();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_seccion_2:
+                                fragment = new Fragment2();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_seccion_3:
+                                fragment = new Fragment3();
+                                fragmentTransaction = true;
+                                break;
+                            case R.id.menu_opcion_1:
+                                Log.i("NavigationView", "Pulsada opción 1");
+                                break;
+                            case R.id.menu_opcion_2:
+                                Log.i("NavigationView", "Pulsada opción 2");
+                                break;
+                        }
+
+                        if(fragmentTransaction) {
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.content_frame, fragment)
+                                    .commit();
+
+                            menuItem.setChecked(true);
+                            getSupportActionBar().setTitle(menuItem.getTitle());
+                        }
+
+                        drawerLayout.closeDrawers();
+
+                        return true;
+                    }
+                });
+
 
 
         //jugador1
@@ -143,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("puntA " + puntA + " puntB " + puntB);
             String a = "";
             String b = "";
+            String m="";
+            String n;
             if (puntA == 10) a = "high card";
             if (puntA == 9) a = "pair";
             if (puntA == 8) a = "double pair";
@@ -165,12 +241,20 @@ public class MainActivity extends AppCompatActivity {
             if (puntB == 1) b = "royal flush";
             if (puntA > puntB) {
                 pantalla = "Player 2 wins with a " + b + " against a " + a;
-            } else if (puntA < puntB) pantalla = "Player 1 wins with a " + a + " against a " + b;
-                //para determinar quien gana cuando tienen carta alta los 2 jugadores
-            else if (puntA == puntB) {
+            }
+            else if (puntA < puntB) pantalla = "Player 1 wins with a " + a + " against a " + b;
+                //para determinar quien gana cuando es empate entre los 2 jugadores
 
+            /*else if (jugador1A.getValor()==14 || jugador1B.getValor()==14){
+
+            }*/
+
+            else if (puntA == puntB) {
+                /*if (jugador1A.getValor()==14){
+                    m="As";
+                }*/
                 if (Math.max(jugador1A.getValor(), jugador1B.getValor()) > Math.max(jugador2A.getValor(), jugador2B.getValor()))
-                    pantalla = "Player 1 wins with a higher " + a;
+                    pantalla = "Player 1 wins with a higher " + a + "."; //Player 1's high card: " + m + " of " + jugador1A.getPalo() +" is higher than player 2 high card, which is a " + Integer.toString(jugador2A.getValor()) + " of " + jugador2A.getPalo();
                 else if (Math.min(jugador1A.getValor(), jugador1B.getValor()) > Math.min(jugador2A.getValor(), jugador2B.getValor()))
                     pantalla = "Player 1 wins with a higher " + a;
                 else if (Math.max(jugador1A.getValor(), jugador1B.getValor()) < Math.max(jugador2A.getValor(), jugador2B.getValor()))
@@ -222,5 +306,27 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
