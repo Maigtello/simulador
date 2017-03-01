@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerStateChanged(int newState) {
 
             }
-        });
+
         */
 
         navView = (NavigationView)findViewById(R.id.navview);
